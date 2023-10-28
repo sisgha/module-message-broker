@@ -1,0 +1,21 @@
+services:
+  sisgea-message-broker:
+    build:
+      context: ../docker/image
+    container_name: sisgea-message-broker
+    env_file:
+      - .message-broker.env
+    volumes:
+      - "sisgea-module-message-broker-data:/bitnami/rabbitmq/mnesia"
+    networks:
+      - sisgea-net
+    ports:
+      - 127.128.2.10:5672:5672
+      - 127.128.2.10:15672:15672
+
+networks:
+  sisgea-net:
+    external: true
+
+volumes:
+  sisgea-module-message-broker-data:
